@@ -1,0 +1,151 @@
+
+#include <iostream>
+using namespace std;
+
+// 1. Single-Level Inheritance
+class Animal {
+public:
+    void eat() {
+        cout << "Animal eats food" << endl;
+    }
+};
+
+class Dog : public Animal {
+public:
+    void bark() {
+        cout << "Dog barks" << endl;
+    }
+};
+
+// 2. Multilevel Inheritance
+class LivingBeing {
+public:
+    void live() {
+        cout << "Living being is alive" << endl;
+    }
+};
+
+class Mammal : public LivingBeing {
+public:
+    void walk() {
+        cout << "Mammal can walk" << endl;
+    }
+};
+
+class Human : public Mammal {
+public:
+    void think() {
+        cout << "Human can think" << endl;
+    }
+};
+
+// 3. Multiple Inheritance
+class Father {
+public:
+    void fatherQuality() {
+        cout << "Father: Discipline" << endl;
+    }
+};
+
+class Mother {
+public:
+    void motherQuality() {
+        cout << "Mother: Kindness" << endl;
+    }
+};
+
+class Child : public Father, public Mother {
+public:
+    void childQuality() {
+        cout << "Child inherits qualities from both parents" << endl;
+    }
+};
+
+// 4. Hierarchical Inheritance
+class Shape {
+public:
+    void display() {
+        cout << "This is a shape" << endl;
+    }
+};
+
+class Circle : public Shape {
+public:
+    void drawCircle() {
+        cout << "Drawing a circle" << endl;
+    }
+};
+
+class Rectangle : public Shape {
+public:
+    void drawRectangle() {
+        cout << "Drawing a rectangle" << endl;
+    }
+};
+
+// 5. Hybrid Inheritance
+// Combination of hierarchical and multiple inheritance
+class Person {
+public:
+    void showPerson() {
+        cout << "This is a person" << endl;
+    }
+};
+
+class Student : virtual public Person {
+public:
+    void study() {
+        cout << "Student studies" << endl;
+    }
+};
+
+class Athlete : virtual public Person {
+public:
+    void play() {
+        cout << "Athlete plays sports" << endl;
+    }
+};
+
+class ScholarAthlete : public Student, public Athlete {
+public:
+    void showRole() {
+        cout << "Scholar athlete is both a student and an athlete"
+             << endl;
+    }
+};
+
+int main() {
+    cout << "1. SINGLE-LEVEL INHERITANCE" << endl;
+    Dog d;
+    d.eat();
+    d.bark();
+
+    cout << "\n2. MULTILEVEL INHERITANCE" << endl;
+    Human h;
+    h.live();
+    h.walk();
+    h.think();
+
+    cout << "\n3. MULTIPLE INHERITANCE" << endl;
+    Child c;
+    c.fatherQuality();
+    c.motherQuality();
+    c.childQuality();
+
+    cout << "\n4. HIERARCHICAL INHERITANCE" << endl;
+    Circle ci;
+    Rectangle r;
+    ci.display();
+    ci.drawCircle();
+    r.display();
+    r.drawRectangle();
+
+    cout << "\n5. HYBRID INHERITANCE" << endl;
+    ScholarAthlete sa;
+    sa.showPerson();
+    sa.study();
+    sa.play();
+    sa.showRole();
+
+    return 0;
+}
