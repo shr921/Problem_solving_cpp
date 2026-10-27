@@ -1,0 +1,57 @@
+
+#include <iostream>
+#include <stdexcept>
+using namespace std;
+
+double calculate(double a, double b, char op) {
+    try {
+        if (op == '/' && b == 0) {
+            throw runtime_error("Division by zero is not allowed.");
+        }
+
+        if (op != '+' && op != '-' &&
+            op != '*' && op != '/') {
+            throw invalid_argument("Invalid operator.");
+        }
+
+        switch (op) {
+            case '+': return a + b;
+            case '-': return a - b;
+            case '*': return a * b;
+            case '/': return a / b;
+        }
+    }
+    catch (const exception& e) {
+        cout << "Calculation Error: " << e.what() << '\n';
+        throw; // Pass the exception to the caller
+    }
+
+    return 0;
+}
+
+int main() {
+    double a, b;
+    char op;
+
+    try {
+        cout << "Enter: number operator number\n";
+        if (!(cin >> a >> op >> b)) {
+            throw runtime_error("Invalid input format.");
+        }
+
+        double result = calculate(a, b, op);
+        cout << "Result: " << result << '\n';
+    }
+    catch (const invalid_argument& e) {
+        cout << "Input Error: " << e.what() << '\n';
+    }
+    catch (const runtime_error& e) {
+        cout << "Runtime Error: " << e.what() << '\n';
+    }
+    catch (const exception& e) {
+        cout << "General Error: " << e.what() << '\n';
+    }
+
+    cout << "Program ended safely.\n";
+    return 0;
+}
