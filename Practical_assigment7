@@ -1,0 +1,122 @@
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+// Parent class
+class Ticket {
+public:
+    string passenger;
+    int distance;
+
+    virtual void calculateFare() {
+        cout << "Calculating ticket fare..." << endl;
+    }
+
+    virtual void displayTicket() {
+        cout << "Passenger: " << passenger << endl;
+    }
+
+    virtual ~Ticket() {}
+};
+
+// Child class 1: Bus
+class Bus : public Ticket {
+public:
+    void calculateFare() override {
+        int fare = distance * 2;
+        cout << "Bus Ticket Fare: Rs." << fare << endl;
+    }
+
+    void displayTicket() override {
+        cout << "\n--- BUS TICKET ---" << endl;
+        Ticket::displayTicket();
+        cout << "Distance: " << distance << " km" << endl;
+        calculateFare();
+    }
+};
+
+// Child class 2: Train
+class Train : public Ticket {
+public:
+    void calculateFare() override {
+        int fare = distance * 1.5;
+        cout << "Train Ticket Fare: Rs." << fare << endl;
+    }
+
+    void displayTicket() override {
+        cout << "\n--- TRAIN TICKET ---" << endl;
+        Ticket::displayTicket();
+        cout << "Distance: " << distance << " km" << endl;
+        calculateFare();
+    }
+};
+
+// Child class 3: Flight
+class Flight : public Ticket {
+public:
+    void calculateFare() override {
+        int fare = distance * 5 + 1000;
+        cout << "Flight Ticket Fare: Rs." << fare << endl;
+    }
+
+    void displayTicket() override {
+        cout << "\n--- FLIGHT TICKET ---" << endl;
+        Ticket::displayTicket();
+        cout << "Distance: " << distance << " km" << endl;
+        calculateFare();
+    }
+};
+
+int main() {
+    Ticket* ptr;
+
+    Bus b;
+    Train t;
+    Flight f;
+
+    int choice;
+
+    do {
+        cout << "\n===== TICKET BOOKING SYSTEM =====" << endl;
+        cout << "1. Book Bus Ticket" << endl;
+        cout << "2. Book Train Ticket" << endl;
+        cout << "3. Book Flight Ticket" << endl;
+        cout << "4. Exit" << endl;
+        cout << "Enter choice: ";
+        cin >> choice;
+
+        if (choice >= 1 && choice <= 3) {
+            cout << "Enter passenger name: ";
+            cin >> (choice == 1 ? b.passenger :
+                    choice == 2 ? t.passenger : f.passenger);
+
+            cout << "Enter distance in km: ";
+
+            if (choice == 1) {
+                cin >> b.distance;
+                ptr = &b;
+            }
+            else if (choice == 2) {
+                cin >> t.distance;
+                ptr = &t;
+            }
+            else {
+                cin >> f.distance;
+                ptr = &f;
+            }
+
+            ptr->displayTicket();
+        }
+        else if (choice != 4) {
+            cout << "Invalid choice!" << endl;
+        }
+
+    } while (choice != 4);
+
+    cout << "Thank you for using our system!" << endl;
+
+    return 0;
+}
+
+
