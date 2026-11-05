@@ -1,0 +1,160 @@
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+// FUNCTION TEMPLATE
+// Works with different data types
+template <typename T>
+T findMaximum(T a, T b)
+{
+    return (a > b) ? a : b;
+}
+
+// CLASS TEMPLATE
+// Stores and operates on two values of the same data type
+template <typename T>
+class Calculator
+{
+private:
+    T num1, num2;
+
+public:
+    Calculator(T a, T b)
+    {
+        num1 = a;
+        num2 = b;
+    }
+
+    T add()
+    {
+        return num1 + num2;
+    }
+
+    T subtract()
+    {
+        return num1 - num2;
+    }
+
+    T multiply()
+    {
+        return num1 * num2;
+    }
+
+    T divide()
+    {
+        if (num2 == 0)
+        {
+            cout << "Error: Division by zero!" << endl;
+            return T();
+        }
+
+        return num1 / num2;
+    }
+
+    void display()
+    {
+        cout << "\nResults:" << endl;
+        cout << "Addition: " << add() << endl;
+        cout << "Subtraction: " << subtract() << endl;
+        cout << "Multiplication: " << multiply() << endl;
+        cout << "Division: " << divide() << endl;
+    }
+};
+
+int main()
+{
+    int choice;
+
+    do
+    {
+        cout << "\n===== TEMPLATE DEMONSTRATION =====" << endl;
+        cout << "1. Integer Test Case" << endl;
+        cout << "2. Float Test Case" << endl;
+        cout << "3. Double Test Case" << endl;
+        cout << "4. String Test Case" << endl;
+        cout << "5. Function Template Test" << endl;
+        cout << "0. Exit" << endl;
+
+        cout << "\nEnter your choice: ";
+        cin >> choice;
+
+        switch (choice)
+        {
+            case 1:
+            {
+                int a, b;
+                cout << "Enter two integers: ";
+                cin >> a >> b;
+
+                Calculator<int> obj(a, b);
+                obj.display();
+
+                cout << "Maximum: " << findMaximum(a, b) << endl;
+                break;
+            }
+
+            case 2:
+            {
+                float a, b;
+                cout << "Enter two float values: ";
+                cin >> a >> b;
+
+                Calculator<float> obj(a, b);
+                obj.display();
+
+                cout << "Maximum: " << findMaximum(a, b) << endl;
+                break;
+            }
+
+            case 3:
+            {
+                double a, b;
+                cout << "Enter two double values: ";
+                cin >> a >> b;
+
+                Calculator<double> obj(a, b);
+                obj.display();
+
+                cout << "Maximum: " << findMaximum(a, b) << endl;
+                break;
+            }
+
+            case 4:
+            {
+                string a, b;
+                cout << "Enter two strings: ";
+                cin >> a >> b;
+
+                Calculator<string> obj(a, b);
+
+                cout << "First string: " << a << endl;
+                cout << "Second string: " << b << endl;
+                cout << "Maximum (lexicographically): "
+                     << findMaximum(a, b) << endl;
+                break;
+            }
+
+            case 5:
+            {
+                int a, b;
+                cout << "Enter two numbers: ";
+                cin >> a >> b;
+
+                cout << "Maximum using function template: "
+                     << findMaximum(a, b) << endl;
+                break;
+            }
+
+            case 0:
+                cout << "Program terminated." << endl;
+                break;
+
+            default:
+                cout << "Invalid choice! Try again." << endl;
+        }
+
+    } while (choice != 0);
+
+    return 0;
+}
