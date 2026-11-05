@@ -1,0 +1,35 @@
+#include <iostream>
+#include <string>
+#include <utility>
+using namespace std;
+
+int main() {
+    string str1, str2;
+
+    cout << "Enter first string: ";
+    getline(cin, str1);
+
+    // Test Case 1: Move str1 into str2
+    str2 = move(str1);
+
+    cout << "\nAfter using std::move():\n";
+    cout << "str1 (source): " << str1 << endl;
+    cout << "str2 (destination): " << str2 << endl;
+
+    // Test Case 2: Move str2 into another string
+    string str3 = move(str2);
+
+    cout << "\nAfter moving str2 into str3:\n";
+    cout << "str2 (source): " << str2 << endl;
+    cout << "str3 (destination): " << str3 << endl;
+
+    // Test Case 3: Normal copying for comparison
+    string str4 = str3;
+
+    cout << "\nAfter normal copying:\n";
+    cout << "str3 (original): " << str3 << endl;
+    cout << "str4 (copy): " << str4 << endl;
+
+    return 0;
+}
+
