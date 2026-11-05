@@ -3,33 +3,73 @@
 #include <utility>
 using namespace std;
 
+// User-defined class
+class Student {
+public:
+    string name;
+    string branch;
+
+    Student(string n, string b) {
+        name = n;
+        branch = b;
+    }
+
+    void display() {
+        cout << "Name: " << name << endl;
+        cout << "Branch: " << branch << endl;
+    }
+};
+
 int main() {
-    string str1, str2;
+    int choice;
 
-    cout << "Enter first string: ";
-    getline(cin, str1);
+    cout << "===== STD::MOVE DEMONSTRATION =====\n";
+    cout << "1. Built-in example (String)\n";
+    cout << "2. User-defined data type (Student)\n";
+    cout << "Enter your choice: ";
+    cin >> choice;
+    cin.ignore();
 
-    // Test Case 1: Move str1 into str2
-    str2 = move(str1);
+    if (choice == 1) {
+        string str1, str2;
 
-    cout << "\nAfter using std::move():\n";
-    cout << "str1 (source): " << str1 << endl;
-    cout << "str2 (destination): " << str2 << endl;
+        cout << "\nEnter a string: ";
+        getline(cin, str1);
 
-    // Test Case 2: Move str2 into another string
-    string str3 = move(str2);
+        str2 = move(str1);
 
-    cout << "\nAfter moving str2 into str3:\n";
-    cout << "str2 (source): " << str2 << endl;
-    cout << "str3 (destination): " << str3 << endl;
+        cout << "\nAfter std::move():\n";
+        cout << "Source string: " << str1 << endl;
+        cout << "Destination string: " << str2 << endl;
+    }
 
-    // Test Case 3: Normal copying for comparison
-    string str4 = str3;
+    else if (choice == 2) {
+        string name, branch;
 
-    cout << "\nAfter normal copying:\n";
-    cout << "str3 (original): " << str3 << endl;
-    cout << "str4 (copy): " << str4 << endl;
+        cout << "\nEnter student name: ";
+        getline(cin, name);
+
+        cout << "Enter student branch: ";
+        getline(cin, branch);
+
+        Student s1(name, branch);
+        Student s2("", "");
+
+        // Moving user-defined object
+        s2 = move(s1);
+
+        cout << "\nAfter std::move():\n";
+
+        cout << "\nSource object:\n";
+        s1.display();
+
+        cout << "\nDestination object:\n";
+        s2.display();
+    }
+
+    else {
+        cout << "Invalid choice!";
+    }
 
     return 0;
 }
-
