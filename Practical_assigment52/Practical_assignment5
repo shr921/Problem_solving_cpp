@@ -1,1 +1,177 @@
 
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+class BankManager;  // Forward declaration
+
+class BankAccount {
+private:
+    int accountNumber;
+    string holderName;
+    double balance;
+
+    static int totalAccounts;
+
+public:
+
+    // Constructor
+    BankAccount(int accountNumber, string holderName, double balance) {
+
+        this->accountNumber = accountNumber;
+        this->holderName = holderName;
+        this->balance = balance;
+
+        totalAccounts++;
+    }
+
+    // Inline function
+    inline void displayBalance() {
+        cout << "Current Balance: " << balance << endl;
+    }
+
+    // Deposit money
+    void deposit(double amount) {
+
+        if (amount > 0) {
+            this->balance += amount;
+            cout << "Deposit successful!" << endl;
+        }
+        else {
+            cout << "Invalid deposit amount!" << endl;
+        }
+    }
+
+    // Withdraw money
+    void withdraw(double amount) {
+
+        if (amount <= 0) {
+            cout << "Invalid withdrawal amount!" << endl;
+        }
+        else if (amount > this->balance) {
+            cout << "Insufficient balance!" << endl;
+        }
+        else {
+            this->balance -= amount;
+            cout << "Withdrawal successful!" << endl;
+        }
+    }
+
+    // Static member function
+    static void showTotalAccounts() {
+        cout << "Total Accounts: " << totalAccounts << endl;
+    }
+
+    // Friend class declaration
+    friend class BankManager;
+};
+
+
+// Initialize static data member
+int BankAccount::totalAccounts = 0;
+
+
+// Friend class
+class BankManager {
+
+public:
+
+    void displayAccountDetails(BankAccount &account) {
+
+        cout << "\n--- Account Details ---" << endl;
+
+        // Accessing private members
+        cout << "Account Number: " << account.accountNumber << endl;
+        cout << "Holder Name: " << account.holderName << endl;
+        cout << "Balance: " << account.balance << endl;
+    }
+
+    void transferMoney(BankAccount &from, BankAccount &to, double amount) {
+
+        if (amount <= 0) {
+            cout << "Invalid transfer amount!" << endl;
+        }
+        else if (amount > from.balance) {
+            cout << "Insufficient balance for transfer!" << endl;
+        }
+        else {
+            from.balance -= amount;
+            to.balance += amount;
+
+            cout << "Transfer successful!" << endl;
+        }
+    }
+};
+
+
+// Main function
+int main() {
+
+    BankAccount account1(101, "shreyash", 5000);
+    BankAccount account2(102, "Shreyash", 3000);
+
+    BankManager manager;
+
+    int choice;
+    double amount;
+
+    do {
+
+        cout << "\n===== BANK MANAGEMENT SYSTEM =====" << endl;
+        cout << "1. Deposit Money" << endl;
+        cout << "2. Withdraw Money" << endl;
+        cout << "3. Display Balance" << endl;
+        cout << "4. Display Account Details" << endl;
+        cout << "5. Transfer Money (Account 1 to 2)" << endl;
+        cout << "6. Show Total Accounts" << endl;
+        cout << "7. Exit" << endl;
+
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+
+            case 1:
+                cout << "Enter deposit amount: ";
+                cin >> amount;
+                account1.deposit(amount);
+                break;
+
+            case 2:
+                cout << "Enter withdrawal amount: ";
+                cin >> amount;
+                account1.withdraw(amount);
+                break;
+
+            case 3:
+                account1.displayBalance();
+                break;
+
+            case 4:
+                manager.displayAccountDetails(account1);
+                break;
+
+            case 5:
+                cout << "Enter transfer amount: ";
+                cin >> amount;
+                manager.transferMoney(account1, account2, amount);
+                break;
+
+            case 6:
+                BankAccount::showTotalAccounts();
+                break;
+
+            case 7:
+                cout << "Exiting program..." << endl;
+                break;
+
+            default:
+                cout << "Invalid choice!" << endl;
+        }
+
+    } while (choice != 7);
+
+    return 0;
+}
+
