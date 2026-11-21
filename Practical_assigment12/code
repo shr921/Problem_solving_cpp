@@ -1,0 +1,74 @@
+
+
+#include <iostream>
+using namespace std;
+
+// User-defined conversion class
+class Number {
+public:
+    int value;
+
+    Number(int x) {
+        value = x;
+    }
+
+    // Object to int conversion
+    operator int() {
+        return value;
+    }
+};
+
+int main() {
+    int choice;
+
+    cout << "===== TYPE CASTING IN C++ =====\n";
+    cout << "1. Implicit Type Conversion\n";
+    cout << "2. Explicit Type Conversion\n";
+    cout << "3. User-Defined Conversion\n";
+    cout << "Enter your choice: ";
+    cin >> choice;
+
+    switch (choice) {
+
+        // 1. Implicit Conversion
+        case 1: {
+            float a = 10.75;
+            int b = a;
+
+            cout << "\nImplicit Conversion\n";
+            cout << "Original float: " << a << endl;
+            cout << "Converted int: " << b << endl;
+            break;
+        }
+
+        // 2. Explicit Conversion
+        case 2: {
+            float a = 20.85;
+            int b = static_cast<int>(a);
+
+            cout << "\nExplicit Conversion\n";
+            cout << "Original float: " << a << endl;
+            cout << "Converted int: " << b << endl;
+            break;
+        }
+
+        // 3. User-Defined Conversion
+        case 3: {
+            int a = 100;
+
+            Number n = a;  // int to object
+            int b = n;     // object to int
+
+            cout << "\nUser-Defined Conversion\n";
+            cout << "Original integer: " << a << endl;
+            cout << "Object value: " << n.value << endl;
+            cout << "Converted integer: " << b << endl;
+            break;
+        }
+
+        default:
+            cout << "Invalid choice!";
+    }
+
+    return 0;
+}
