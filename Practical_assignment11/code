@@ -1,0 +1,100 @@
+
+ #include <iostream>
+ #include <vector>
+#include <list>
+using namespace std;
+
+int main() {
+    int choice;
+
+    cout << "===== STL CONTAINERS =====\n";
+    cout << "1. Vector Container\n";
+    cout << "2. List Container\n";
+    cout << "Enter your choice: ";
+    cin >> choice;
+
+    switch(choice) {
+
+        // VECTOR CONTAINER
+        case 1: {
+            vector<int> v;
+            int n, x;
+
+            cout << "\nEnter number of elements: ";
+            cin >> n;
+
+            cout << "Enter elements:\n";
+            for(int i = 0; i < n; i++) {
+                cin >> x;
+                v.push_back(x);
+            }
+
+            cout << "Vector elements: ";
+            for(int i = 0; i < v.size(); i++) {
+                cout << v[i] << " ";
+            }
+
+            cout << "\nFirst element: " << v.front();
+            cout << "\nLast element: " << v.back();
+
+            v.push_back(100);
+
+            cout << "\nAfter adding 100: ";
+            for(int x : v)
+                cout << x << " ";
+
+            v.pop_back();
+
+            cout << "\nAfter removing last element: ";
+            for(int x : v)
+                cout << x << " ";
+
+            cout << "\nVector size: " << v.size() << endl;
+            break;
+        }
+
+        // LIST CONTAINER
+        case 2: {
+            list<int> l;
+            int n, x;
+
+            cout << "\nEnter number of elements: ";
+            cin >> n;
+
+            cout << "Enter elements:\n";
+            for(int i = 0; i < n; i++) {
+                cin >> x;
+                l.push_back(x);
+            }
+
+            cout << "List elements: ";
+            for(int x : l)
+                cout << x << " ";
+
+            cout << "\nFirst element: " << l.front();
+            cout << "\nLast element: " << l.back();
+
+            l.push_front(50);
+            l.push_back(100);
+
+            cout << "\nAfter adding 50 and 100: ";
+            for(int x : l)
+                cout << x << " ";
+
+            l.pop_front();
+            l.pop_back();
+
+            cout << "\nAfter removing first and last: ";
+            for(int x : l)
+                cout << x << " ";
+
+            cout << "\nList size: " << l.size() << endl;
+            break;
+        }
+
+        default:
+            cout << "Invalid choice!";
+    }
+
+    return 0;
+}
